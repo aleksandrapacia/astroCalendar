@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'calendar_page.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Astronomy Calendar',
-      home: CalendarPage(),
+      home: HomePage(),
     );
   }
 }
