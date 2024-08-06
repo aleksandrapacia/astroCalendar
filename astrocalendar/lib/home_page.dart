@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     const ListPage(),
   ];
 
-  void onItemTappe(int index) {
+  void onItemClicked(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -27,9 +27,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calendar'),
-      ),
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
@@ -42,8 +39,11 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'List',
-          )
+          ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: onItemClicked,
       ),
     );
   }
