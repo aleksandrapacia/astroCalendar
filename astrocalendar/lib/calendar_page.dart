@@ -20,35 +20,6 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text(
-        'Calendar',
-        selectionColor: Colors.deepPurple,
-      )),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(
-            () {
-              currentPageIndex = index;
-            },
-          );
-          indicatorColor:
-          Colors.amber;
-          selectedIndex:
-          currentPageIndex;
-        },
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.calendar_month),
-            icon: Icon(Icons.calendar_month_outlined),
-            label: 'Calendar',
-          ),
-          NavigationDestination(
-              selectedIcon: Icon(Icons.list),
-              icon: Icon(Icons.list_outlined),
-              label: 'List'),
-        ],
-      ),
       body: Center(
         child: Column(
           children: [
