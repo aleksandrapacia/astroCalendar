@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'list_page.dart';
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -10,9 +12,19 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   int currentPageIndex = 0;
+
+  static final List<Widget> _pages = <Widget>[
+    const CalendarPage(),
+    const ListPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text(
+        'Calendar',
+        selectionColor: Colors.deepPurple,
+      )),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(
