@@ -27,10 +27,14 @@ class _CalendarPageState extends State<CalendarPage> {
         child: Column(
           children: [
             TableCalendar(
-              firstDay: DateTime.utc(2000, 1, 1),
-              lastDay: DateTime.utc(2100, 12, 31),
-              focusedDay: DateTime.now(),
-            ),
+                firstDay: DateTime.utc(2000, 1, 1),
+                lastDay: DateTime.utc(2100, 12, 31),
+                focusedDay: DateTime.now(),
+                calendarStyle: const CalendarStyle(
+                    markerDecoration: BoxDecoration(
+                  color: Colors.deepPurple,
+                  shape: BoxShape.circle,
+                ))),
           ],
         ),
       ),
