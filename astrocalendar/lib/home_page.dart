@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'calendar_page.dart';
-import 'list_page.dart';
+import 'listing_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = <Widget>[
     const CalendarPage(),
-    const ListPage(),
+    const ListingPage()
   ];
 
   void onItemClicked(int index) {
