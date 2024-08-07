@@ -36,29 +36,17 @@ class _CalendarPageState extends State<CalendarPage> {
               firstDay: DateTime.utc(2000, 1, 1),
               lastDay: DateTime.utc(2100, 12, 31),
               focusedDay: DateTime.now(),
+              eventLoader: (day) => _events[day] ?? [],
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  selectedDay = selectedDay;
+                });
+              },
               calendarStyle: const CalendarStyle(
                 markerDecoration: BoxDecoration(
                   color: Colors.deepPurple,
                   shape: BoxShape.circle,
                 ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _events.keys.length,
-                itemBuilder: (context, index) {
-                  DateTime date = _events.keys.elementAt(index);
-                  return ListTile(
-                    title: Text(
-                      date.toLocal().toString().split(' ')[0],
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          _events[date]!.map((event) => Text(event)).toList(),
-                    ),
-                  );
-                },
               ),
             ),
           ],

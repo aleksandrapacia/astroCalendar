@@ -19,6 +19,21 @@ class _ListingPageState extends State<ListingPage> {
       appBar: AppBar(
         title: const Text('Observations'),
       ),
+      body: ListView.builder(
+        itemCount: _events.keys.length,
+        itemBuilder: (context, index) {
+          DateTime date = _events.keys.elementAt(index);
+          return ListTile(
+            title: Text(
+              date.toLocal().toString().split(' ')[0],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _events[date]!.map((event) => Text(event)).toList(),
+            ),
+          );
+        },
+      ),
     );
   }
 }
