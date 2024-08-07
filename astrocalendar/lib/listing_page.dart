@@ -11,7 +11,7 @@ class ListingPage extends StatefulWidget {
 }
 
 class _ListingPageState extends State<ListingPage> {
-  late Map<DateTime, List<String>> _events;
+  late Map<DateTime, List<Event>> _events;
   @override
   Widget build(BuildContext context) {
     _events = Provider.of<EventProvider>(context).events;
@@ -23,14 +23,15 @@ class _ListingPageState extends State<ListingPage> {
         itemCount: _events.keys.length,
         itemBuilder: (context, index) {
           DateTime date = _events.keys.elementAt(index);
-          return ListTile(
-            title: Text(
-              date.toLocal().toString().split(' ')[0],
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: _events[date]!.map((event) => Text(event)).toList(),
-            ),
+          List<Event> eventList = _events[date]!;
+          return ExpansionTile(
+            title: Text(date.toLocal().toString().split(' ')[0]),
+            children: eventList
+                .map((event) => ListTile(
+                      title: Text(event.observation),
+                      subtitle: Text(event.telescope),
+                    ))
+                .toList(),
           );
         },
       ),

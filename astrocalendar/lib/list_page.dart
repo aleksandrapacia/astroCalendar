@@ -13,14 +13,15 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   final _formKey = GlobalKey<FormState>();
-  final _eventController = TextEditingController();
+  final _observationController = TextEditingController();
+  final _telescopeController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('List Page'),
+        title: const Text('Observation Editor'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,15 +30,20 @@ class _ListPageState extends State<ListPage> {
           child: Column(
             children: [
               TextFormField(
-                controller: _eventController,
-                decoration: const InputDecoration(labelText: 'Wydarzenie'),
+                controller: _observationController,
+                decoration:
+                    const InputDecoration(labelText: 'Observation Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Proszę wpisać wydarzenie';
+                    return 'Name of the observation is required.';
                   }
                   return null;
                 },
               ),
+              TextFormField(
+                  controller: _telescopeController,
+                  decoration:
+                      const InputDecoration(labelText: 'Telescope Name ')),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -54,19 +60,21 @@ class _ListPageState extends State<ListPage> {
                     }
                   });
                 },
-                child: Text(
-                    'Wybierz datę: ${_selectedDate.toLocal()}'.split(' ')[0]),
+                child: Text('Date ${_selectedDate.toLocal()}'.split(' ')[0]),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    Event newEvent = Event(
+                        observation: _observationController.text,
+                        telescope: _telescopeController.text);
                     Provider.of<EventProvider>(context, listen: false)
-                        .addEvent(_selectedDate, _eventController.text);
+                        .addEvent(_selectedDate, newEvent);
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add an event'),
+                child: const Text('Save Observation'),
               ),
             ],
           ),

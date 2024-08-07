@@ -15,7 +15,7 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   int currentPageIndex = 0;
-  late Map<DateTime, List<String>> _events;
+  late Map<DateTime, List<Event>> _events;
 
   static final List<Widget> _pages = <Widget>[
     const CalendarPage(),
@@ -30,26 +30,22 @@ class _CalendarPageState extends State<CalendarPage> {
         title: const Text('Calendar'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            TableCalendar(
-              firstDay: DateTime.utc(2000, 1, 1),
-              lastDay: DateTime.utc(2100, 12, 31),
-              focusedDay: DateTime.now(),
-              eventLoader: (day) => _events[day] ?? [],
-              onDaySelected: (selectedDay, focusedDay) {
-                setState(() {
-                  selectedDay = selectedDay;
-                });
-              },
-              calendarStyle: const CalendarStyle(
-                markerDecoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  shape: BoxShape.circle,
-                ),
-              ),
+        child: TableCalendar(
+          firstDay: DateTime.utc(2000, 1, 1),
+          lastDay: DateTime.utc(2100, 12, 31),
+          focusedDay: DateTime.now(),
+          eventLoader: (day) => _events[day] ?? [],
+          onDaySelected: (selectedDay, focusedDay) {
+            setState(() {
+              selectedDay = selectedDay;
+            });
+          },
+          calendarStyle: const CalendarStyle(
+            markerDecoration: BoxDecoration(
+              color: Colors.deepPurple,
+              shape: BoxShape.circle,
             ),
-          ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
