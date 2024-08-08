@@ -31,18 +31,25 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
       body: Center(
         child: TableCalendar(
+          locale: 'en_US',
+          rowHeight: 43.0,
+          headerStyle: const HeaderStyle(
+              titleCentered: true, formatButtonVisible: false),
           firstDay: DateTime.utc(2000, 1, 1),
           lastDay: DateTime.utc(2100, 12, 31),
           focusedDay: DateTime.now(),
           eventLoader: (day) => _events[day] ?? [],
+          //TODO: why ??????????
+          selectedDayPredicate: (day) => isSameDay(DateTime.now(), day),
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
               selectedDay = selectedDay;
             });
+            _showEventDetails(selectedDay);
           },
           calendarStyle: const CalendarStyle(
             markerDecoration: BoxDecoration(
-              color: Colors.deepPurple,
+              color: Colors.red,
               shape: BoxShape.circle,
             ),
           ),
@@ -56,6 +63,29 @@ class _CalendarPageState extends State<CalendarPage> {
           );
         },
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _showEventDetails(DateTime date) {
+    final events = _events[date] ?? [];
+
+    if (events.isEmpty) return;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            final event = events[index];
+            return ListTile(
+              title: Text(event.observation),
+              subtitle: Text(event.telescope),
+            );
+          },
+        ),
       ),
     );
   }
