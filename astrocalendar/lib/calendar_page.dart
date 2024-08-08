@@ -16,6 +16,12 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   int currentPageIndex = 0;
   late Map<DateTime, List<Event>> _events;
+  DateTime today = DateTime.now();
+  void _onDaySelected(DateTime day, DateTime focusedDay) {
+    setState(() {
+      today = day;
+    });
+  }
 
   static final List<Widget> _pages = <Widget>[
     const CalendarPage(),
@@ -38,15 +44,10 @@ class _CalendarPageState extends State<CalendarPage> {
           firstDay: DateTime.utc(2000, 1, 1),
           lastDay: DateTime.utc(2100, 12, 31),
           focusedDay: DateTime.now(),
+          availableGestures: AvailableGestures.all,
           eventLoader: (day) => _events[day] ?? [],
-          //TODO: why ??????????
-          selectedDayPredicate: (day) => isSameDay(DateTime.now(), day),
-          onDaySelected: (selectedDay, focusedDay) {
-            setState(() {
-              selectedDay = selectedDay;
-            });
-            _showEventDetails(selectedDay);
-          },
+          onDaySelected: _onDaySelected,
+          selectedDayPredicate: (day) => isSameDay(today, day),
           calendarStyle: const CalendarStyle(
             markerDecoration: BoxDecoration(
               color: Colors.red,
