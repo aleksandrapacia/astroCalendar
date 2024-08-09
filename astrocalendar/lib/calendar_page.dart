@@ -14,6 +14,7 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   int currentPageIndex = 0;
+  // map where events are stored
   late Map<DateTime, List<Event>> _events;
   DateTime _selectedDay = DateTime.now(); //today
 
@@ -27,7 +28,7 @@ class _CalendarPageState extends State<CalendarPage> {
       body: Center(
         child: TableCalendar(
           locale: 'en_US',
-          rowHeight: 100.0,
+          rowHeight: 60.0,
           headerStyle: const HeaderStyle(
               titleCentered: true, formatButtonVisible: false),
           firstDay: DateTime.utc(2000, 1, 1),
@@ -40,7 +41,8 @@ class _CalendarPageState extends State<CalendarPage> {
               _selectedDay = selectedDay;
             });
           },
-          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+          selectedDayPredicate: (selectedDay) =>
+              isSameDay(selectedDay, _selectedDay),
           calendarStyle: const CalendarStyle(
             markerDecoration: BoxDecoration(
               color: Colors.red,

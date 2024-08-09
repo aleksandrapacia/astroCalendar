@@ -64,6 +64,7 @@ class _ListPageState extends State<ListPage> {
                 child: Text('Date ${_selectedDate.toLocal()}'.split(' ')[0]),
               ),
               const SizedBox(height: 20),
+              // adding an event with a button
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
