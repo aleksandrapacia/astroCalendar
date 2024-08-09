@@ -5,7 +5,8 @@ import 'event_provider.dart';
 
 //add event page
 class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+  const ListPage({super.key, required this.selectedDate});
+  final DateTime selectedDate;
 
   @override
   _ListPageState createState() => _ListPageState();
