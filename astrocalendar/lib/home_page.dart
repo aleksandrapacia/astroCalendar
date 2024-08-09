@@ -1,3 +1,4 @@
+import 'package:astrocalendar/test_calendar.dart';
 import 'package:flutter/material.dart';
 
 import 'calendar_page.dart';
@@ -15,7 +16,8 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = <Widget>[
     const CalendarPage(),
-    const ListingPage()
+    const ListingPage(),
+    const TestCalendar(),
   ];
 
   void onItemClicked(int index) {
@@ -40,6 +42,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.home),
             label: 'List',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Test'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
